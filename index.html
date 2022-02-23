@@ -3,7 +3,6 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <link rel="stylesheet" href="assets/css/style.css">
       <title>Pinalytics</title>
    </head>
@@ -12,10 +11,19 @@
       <div class="instructions-div">
       <h2>Instructions</h2>
       <p>
-          Log your scores in the table below as you play.
+          Log your scores in the form below as you play. When you have finished your game, save your score and add it to the system.
       </p>
+      <form method="POST" action="https://formdump.codeinstitute.net/" id="frame-submit">
+         <form>
+            <label for="attempt-1-input">Attempt 1</label>
+            <input type="text" id="attempt-1-input" name="attempt-1-input">
+            <label for="attempt-2-input">Attempt 2</label>
+            <input type="text" id="attempt-2-input" name="attempt-2-input">
+            <input type="submit" value="Record Score"></input>
+          </form>
     </div>
-      <form method="GET">
+
+    </form>
       <table>
          <tr class="score-column">
             <th>1</th>
@@ -31,32 +39,31 @@
             <th class="total-header">Total</th>
          </tr>
          <tr class="score-column">
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
-            <td><input type="text" class="attempt1-score-input"><input type="text" class="attempt2-score-input"></td>
+            <td id="frame-score-1"></td>
+            <td id="frame-score-2"></td>
+            <td id="frame-score-3"></td>
+            <td id="frame-score-4"></td>
+            <td id="frame-score-5"></td>
+            <td id="frame-score-6"></td>
+            <td id="frame-score-7"></td>
+            <td id="frame-score-8"></td>
+            <td id="frame-score-9"></td>
+            <td id="frame-score-10"></td>
          </tr>
-         <tr class="score-column">
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-            <td class="frame-score"></td>
-
+         <tr class="score-column" id="cumulative-score">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
          </tr>
       </table>
-    </form>
+   
       <script src="assets/js/script.js"></script>
    </body>
 </html>
