@@ -1,0 +1,24 @@
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+input {
+    width: 40%;
+}
+
+.instructions-div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.score-column td {
+    text-align: right;
+}
+
+.total-header {
+    width: 10%;
+}
