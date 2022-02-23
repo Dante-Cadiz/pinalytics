@@ -12,7 +12,6 @@ function recordScore(event) {
 
 
 function calculateFrameScore() {
-
 }
 
 function calculateTotalScore() {
