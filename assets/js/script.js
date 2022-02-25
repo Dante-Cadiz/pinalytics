@@ -1,4 +1,4 @@
-let frameSubmit = document.getElementById("frame-submit")
+let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", recordScore);
 
 // run counter in background script to count attempts, increase counter to 1 for each attempt and and update DOM elements
@@ -9,8 +9,26 @@ frameSubmit.addEventListener("submit", recordScore);
 
 function recordScore(event) {
   event.preventDefault();
-  let input1 = parseInt(document.getElementById("attempt-1-input").value);
-  let input2 = parseInt(document.getElementById("attempt-2-input").value);
+  let input1 = document.getElementById("attempt-1-input").value;
+  let input2 = document.getElementById("attempt-2-input").value;
+  if (input1 === "X") {
+     alert("strike");
+  } else if (input2 === "/") {
+     alert("spare");
+  }else  {
+  parseInt(input1);
+  parseInt(input2);
+  console.log(input1, input2)
+}
+
+
+
+  //let scoreArray = [input1, input2];
+  //let scoreColumns = document.getElementById("score-column").children;
+      //for (let scoreColumn in scoreColumns{
+
+      
+
   // parseInput (X) == 10 or (/) == 10 - in these 2 special cases prevent the usual function - continue or pass loop?  run loop up to counter - no. of attempts
   // then keep on capturing input in 2 arrays
   // work out how to do this so that each individual recording logs the score to the next empty td element
