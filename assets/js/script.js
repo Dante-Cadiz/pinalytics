@@ -18,13 +18,15 @@ function calculateTotalScore() {
 
 function countStrike() {
            // call this function in the calculateTotalScore function when user logs an "X" on first attempt - counts next 2 attempts towards strike score.
-}
+           let input1 = parseInt(document.getElementById("attempt-1-input").value);
+          }
 
 function countSpare() {
 //call this function in the calculateTotalScore function when user logs a "/" on second attempt - adds next ball to total
+let input2 = parseInt(document.getElementById("attempt-2-input").value);
 }
 
-function recordTotalScore {
+function recordTotalScore() {
   //once game is completed, record total score to console
 }
 
