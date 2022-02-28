@@ -12,8 +12,6 @@ table, th, td {
     table-layout: fixed;
 }
 
-
-
 .instructions-div {
     width: 50%;
     margin: 0 auto;
@@ -27,4 +25,12 @@ table, th, td {
 
 .total-header {
     width: 10%;
+}
+
+#score-column {
+    height: 50px;
+}
+
+#cumulative-score {
+    height:50px;
 }

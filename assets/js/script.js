@@ -1,11 +1,9 @@
 let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", recordScore);
-frameSubmit.addEventListener("submit", countAttempt);
+
 
 function countAttempt() {
-for (let x = 0; x<10; x++) {
   console.log("frame submitted");
-}
 }
 
 // run counter in background script to count attempts, increase counter to 1 for each attempt and and update DOM elements
@@ -19,21 +17,22 @@ function recordScore(event) {
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
   if (input1 === "X") {
-     alert("strike");
      countStrike();
+     console.log("strike")
   } else if (input2 === "/") {
-     alert("spare");
+    parseInt(input1);
      countSpare();
+     console.log("spare");
   }else  {
   parseInt(input1);
   parseInt(input2);
-  console.log(input1, input2)
+  console.log(input1, input2);
+}
+countAttempt();
 }
 
-
-
   //let scoreArray = [input1, input2];
-  //let scores = document.getElementsByClassName("score-column")[0].children;
+  //let scores = document.getElementById("score-column").children;
   //for (let i = 0; i<scores.length; i++) {
     //scores[i].addEventListener()
   
@@ -49,10 +48,11 @@ function recordScore(event) {
 // split into 3 functions, user input, processing of data, displaying values in DOM
 // just put it in array and iterate over it? maybe just 1 function
 
-}
+
 
 function incrementScore() {
   // take values that have been put inside the DOM table by the recordScore function and adds them to each other each time a new frame is completed
+  let scores = document.getElementById
 }
 
 
