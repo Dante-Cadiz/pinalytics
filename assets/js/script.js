@@ -1,9 +1,16 @@
 let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", recordScore);
-
+frameSubmit.addEventListener("submit", countAttempt);
+let frames = 0;
+let maxFrames = 9;
 
 function countAttempt() {
-  console.log("frame submitted");
+  if (frames < maxFrames) {
+    frames++;
+    console.log("frame bowled");
+  } else {
+    console.log("10 frames bowled");
+  }
 }
 
 // run counter in background script to count attempts, increase counter to 1 for each attempt and and update DOM elements
@@ -28,16 +35,15 @@ function recordScore(event) {
   parseInt(input2);
   console.log(input1, input2);
 }
-countAttempt();
 }
 
   //let scoreArray = [input1, input2];
-  //let scores = document.getElementById("score-column").children;
+  // let scores = document.getElementById("score-column").children;
+  //     
   //for (let i = 0; i<scores.length; i++) {
     //scores[i].addEventListener()
-  
-
-      
+  // - most important thing now - figure out how to register the numerical frames variable in the loop that fills in the table for the user
+  //score colum children[frames] ??      
 
   // parseInput (X) == 10 or (/) == 10 - in these 2 special cases prevent the usual function - continue or pass loop?  run loop up to counter - no. of attempts
   // then keep on capturing input in 2 arrays
