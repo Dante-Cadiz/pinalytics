@@ -3,15 +3,21 @@ frameSubmit.addEventListener("submit", recordScore);
 frameSubmit.addEventListener("submit", countAttempt);
 let frames = 0;
 let maxFrames = 9;
+let frameArray = [];
 
 function countAttempt() {
-  if (frames < maxFrames) {
+  if (frames === 8) {
+    frames++;
+    console.log("9 frames bowled");
+  } else if (frames < maxFrames) {
     frames++;
     console.log("frame bowled");
   } else {
     console.log("10 frames bowled");
   }
 }
+
+
 
 // run counter in background script to count attempts, increase counter to 1 for each attempt and and update DOM elements
 // add sequence number in HTML elements to correspond with javascript counter
@@ -26,20 +32,20 @@ function recordScore(event) {
   if (input1 === "X") {
      countStrike();
      console.log("strike")
+     frameArray.push(input1, 0)
   } else if (input2 === "/") {
-    parseInt(input1);
      countSpare();
      console.log("spare");
+     frameArray.push(input1, input2);
   }else  {
-  parseInt(input1);
-  parseInt(input2);
-  console.log(input1, input2);
+  frameArray.push(input1, input2);
 }
+console.log(frameArray);
+//fillInScorecard();
 }
 
-  //let scoreArray = [input1, input2];
-  // let scores = document.getElementById("score-column").children;
-  //     
+
+  
   //for (let i = 0; i<scores.length; i++) {
     //scores[i].addEventListener()
   // - most important thing now - figure out how to register the numerical frames variable in the loop that fills in the table for the user
@@ -72,8 +78,16 @@ function countSpare() {
 let input2 = parseInt(document.getElementById("attempt-2-input").value);
 }
 
+function handle10thFrame() {
+
+}
+
 function recordTotalScore() {
   //once game is completed, record total score to console
+  let finalScore = document.getElementById("final_score").innerHTML;
+  if (frames == maxFrames) {
+     
+  }
 }
 
 function calculateAverage() {
