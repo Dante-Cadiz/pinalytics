@@ -1,3 +1,5 @@
+// 'initialise' function to create input fields, so that it is editable on 10th go
+
 let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", recordScore);
 frameSubmit.addEventListener("submit", countAttempt);
@@ -9,6 +11,7 @@ function countAttempt() {
   if (frames === 8) {
     frames++;
     console.log("9 frames bowled");
+    handle10thFrame();
   } else if (frames < maxFrames) {
     frames++;
     console.log("frame bowled");
@@ -41,11 +44,19 @@ function recordScore(event) {
   frameArray.push(input1, input2);
 }
 console.log(frameArray);
-//fillInScorecard();
+let scoreTable = document.getElementById("score-column");
+ let scoreHtml = ` <td class="attempt1-score">${input1}</td>
+ <td class="attempt2-score">${input2}</td>
+ `
+ scoreTable.innerHTML += scoreHtml;
+ let cumulativeScore = document.getElementById("cumulative-score");
+ let cumulativeHtml = `
+ <td colspan="2"></td>
+ `
+ cumulativeScore.innerHTML += cumulativeHtml;
 }
 
 
-  
   //for (let i = 0; i<scores.length; i++) {
     //scores[i].addEventListener()
   // - most important thing now - figure out how to register the numerical frames variable in the loop that fills in the table for the user
