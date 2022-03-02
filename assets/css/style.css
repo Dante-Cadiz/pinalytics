@@ -32,7 +32,7 @@ table, th, td {
     padding-bottom: 30px;
 }
 
-#score-column td {
+#score-column td, #cumulative-score td {
     text-align: right;
     padding-right: 5px;
 }
