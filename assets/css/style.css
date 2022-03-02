@@ -15,6 +15,20 @@ table, th, td {
 .instructions-div {
     width: 50%;
     margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.button {
+  color: #FF0000;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 0 auto;
+}
+
+#form-wrapper {
+    width: 50%;
+    margin: 0 auto;
     padding-bottom: 30px;
 }
 
