@@ -1,5 +1,3 @@
-// 'initialise' function to create input fields, so that it is editable on 10th go
-
 let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", countAttempt);
 let frames = 0;
@@ -24,7 +22,6 @@ function countAttempt(event) {
   }
 }
 
-
 function recordScore() {
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
@@ -32,17 +29,11 @@ function recordScore() {
   let cumulativeScore = document.getElementById("cumulative-score");
   if (input1 === "X") {
      countStrike();
-     console.log("strike")
-     frameArray.push(input1, 0)
   } else if (input2 === "/") {
      countSpare();
-     console.log("spare");
-     frameArray.push(input1, input2);
   }else  {
   frameArray.push(input1, input2);
 }
-console.log(frameArray);
-
 if (frames === 9) {
   let input3 = document.getElementById("attempt-3-input").value;
   let scoreHtml = ` <td class="attempt1-score">${input1}</td>
@@ -64,39 +55,27 @@ let scoreHtml = ` <td class="attempt1-score">${input1}</td>
  `
  cumulativeScore.innerHTML += cumulativeHtml;
 }
+incrementScore();
 }
 
-
-  //for (let i = 0; i<scores.length; i++) {
-    //scores[i].addEventListener()
-  // - most important thing now - figure out how to register the numerical frames variable in the loop that fills in the table for the user
-  //score colum children[frames] ??      
-
-  // parseInput (X) == 10 or (/) == 10 - in these 2 special cases prevent the usual function - continue or pass loop?  run loop up to counter - no. of attempts
-  // then keep on capturing input in 2 arrays
-  // work out how to do this so that each individual recording logs the score to the next empty td element
-  // as well as possibly logging each individual attempt score (as an array) before adding them together
-  // array values added to score column, added value added to cumulative score column
-  //triggers next function?
-// split into 3 functions, user input, processing of data, displaying values in DOM
-// just put it in array and iterate over it? maybe just 1 function
-
-
-
 function incrementScore() {
-  // take values that have been put inside the DOM table by the recordScore function and adds them to each other each time a new frame is completed
-  let scores = document.getElementById
+  console.log(frameArray);
+  //iterate across the array in here
 }
 
 
 function countStrike() {
-           // call this function in the calculateTotalScore function when user logs an "X" on first attempt - counts next 2 attempts towards strike score.
-           let input1 = parseInt(document.getElementById("attempt-1-input").value);
+  let input1 = document.getElementById("attempt-1-input").value;
+  let input2 = document.getElementById("attempt-2-input").value;
+           console.log("strike");
+     frameArray.push(input1);
           }
 
 function countSpare() {
-//call this function in the calculateTotalScore function when user logs a "/" on second attempt - adds next ball to total
-let input2 = parseInt(document.getElementById("attempt-2-input").value);
+  let input1 = document.getElementById("attempt-1-input").value;
+  let input2 = document.getElementById("attempt-2-input").value;
+       console.log("spare");
+     frameArray.push(input1, input2);
 }
 
 function handle10thFrame() {
@@ -120,6 +99,8 @@ function finishGame() {
   `
   formDiv.innerHTML = html;
 }
+
+function undoLastEntry() {}
 
 function calculateAverage() {
 // take all total scores, add them together, and divide that by number of times played
