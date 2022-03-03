@@ -59,7 +59,15 @@ function incrementScore() {
   console.log(integers);
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1));
-  
+  if (last === 10 ) {
+    if (integers.length%2 === 0) {
+      console.log("spare");
+    } else {
+      console.log("strike");
+    }
+  }
+
+
   if (frames === 9) {
   let thirdFromLast = parseInt(integers.slice(-3, -2));
   let mostRecentFrame = thirdFromLast + last + penultimate;
@@ -81,13 +89,13 @@ function incrementScore() {
 
 function countStrike() {
            console.log("strike");
-     frameArray.push("10");
+           frameArray.push("10");
           }
 
 function countSpare() {
   let input1 = document.getElementById("attempt-1-input").value;
        console.log("spare");
-     frameArray.push(input1, "10");
+     frameArray.push("10");
 }
 
 function handle10thFrame() {
