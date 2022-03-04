@@ -26,51 +26,55 @@ function countAttempt(event) {
 function recordScore() {
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
-  let scoreTable = document.getElementById("score-column");
-if (frames === 9) {
-  let input3 = document.getElementById("attempt-3-input").value;
-  frameArray.push(input3);
-  let scoreHtml = ` <td class="attempt1-score">${input1}</td>
- <td class="attempt2-score">${input2}</td>
- <td class="attempt3-score">${input3}</td>
- `
- scoreTable.innerHTML += scoreHtml;
-} else {
-let scoreHtml = ` <td class="attempt1-score">${input1}</td>
- <td class="attempt2-score">${input2}</td>
- `
- scoreTable.innerHTML += scoreHtml;
-}
  if (input1 === "X") {
      frameArray.push("10");
      console.log("strike");
-     return;
   } else if (input2 === "/") {
      frameArray.push("10");
      console.log("spare");
-     return;
   }else  {
   frameArray.push(input1, input2);
 }
-incrementScore();
+let scoreTable = document.getElementById("score-column");
+  if (frames === 9) {
+  let input3 = document.getElementById("attempt-3-input").value;
+  frameArray.push(input3);
+  let scoreHtml = ` <td>${input1}</td>
+ <td>${input2}</td>
+ <td>${input3}</td>
+ `
+ scoreTable.innerHTML += scoreHtml;
+} else {
+let scoreHtml = ` <td>${input1}</td>
+ <td>${input2}</td>
+ `
+ scoreTable.innerHTML += scoreHtml;
+}
+checkLastValue();
+}
+
+function checkLastValue() {
+let scores = document.getElementById("score-column").children;
+let previous = scores[scores.length - 1]
+ if (previous === "X") {
+     handleFrameAfterStrike();
+  } else if (previous === "/") {
+     handleFrameAfterSpare();
+  } else {
+    incrementScore();
+  }
 }
 
 function incrementScore() {
-  let cumulativeScore = document.getElementById("cumulative-score");
-  let integers = frameArray.map(function (y) {
+let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1));
-  if (last === 10 ) {
-    if (integers.length%2 === 0) {
-      handleFrameAfterSpare();
-    } else {
-      handleFrameAfterStrike();
-    } 
-  } else if (frames === 9) {
   let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let cumulativeScore = document.getElementById("cumulative-score");
+  if (frames === 9) {
   let mostRecentFrame = thirdFromLast + last + penultimate;
   totalScore += mostRecentFrame;
   let cumulativeHtml = `
@@ -101,7 +105,7 @@ function handleFrameAfterSpare() {
   totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
-  <td colspan="2">${totalScore}</td><td colspan="2">${totalScore}</td>
+  <td colspan="2">test</td><td colspan="2">${totalScore}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -120,7 +124,7 @@ function handleFrameAfterStrike(){
   totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
- <td colspan="2">${totalScore}</td><td colspan="2">${totalScore}</td>
+ <td colspan="2">test</td><td colspan="2">${totalScore}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
           }
