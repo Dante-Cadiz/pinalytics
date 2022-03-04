@@ -1,69 +1,78 @@
 let frameSubmit = document.getElementById("frame-submit");
-frameSubmit.addEventListener("submit", countAttempt);
+frameSubmit.addEventListener("submit", checkLastValue);
 let frames = 0;
 let maxFrames = 9;
 let totalScore = 0;
 let frameArray = [];
 
-function countAttempt(event) {
+
+function checkLastValue(event) {
   event.preventDefault();
+let previousText = frameArray[frameArray.length -1];
+if (previousText === "10 strike") {
+   recordScore();
+     handleFrameAfterStrike();
+  } else if (previousText === "10 spare") {
+    recordScore();
+     handleFrameAfterSpare();
+  } else {
+    recordScore();
+    incrementScore();
+  }
+  countAttempt();
+}
+
+function countAttempt() {
   if (frames === 8) {
     console.log("9 frames bowled");
-    recordScore();
     handle10thFrame();
     frames++;
   } else if (frames < maxFrames) {
     frames++;
     console.log("frame bowled");
-    recordScore();
   } else {
     console.log("10 frames bowled");
-    recordScore();
     finishGame();
   }
 }
 
+
 function recordScore() {
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
+  let scoreTable = document.getElementById("score-column");
  if (input1 === "X") {
-     frameArray.push("10");
+     frameArray.push("10 strike");
      console.log("strike");
+     let scoreHtml = `<td></td>
+ <td>${input1}</td>
+ `;
+     scoreTable.innerHTML += scoreHtml;
   } else if (input2 === "/") {
-     frameArray.push("10");
+     frameArray.push("10 spare");
      console.log("spare");
-  }else  {
-  frameArray.push(input1, input2);
-}
-let scoreTable = document.getElementById("score-column");
-  if (frames === 9) {
+     let scoreHtml = ` <td>${input1}</td>
+ <td>${input2}</td>
+ `;
+ scoreTable.innerHTML += scoreHtml;  
+  }else if (frames === 9) {
   let input3 = document.getElementById("attempt-3-input").value;
-  frameArray.push(input3);
+  frameArray.push(input1, input2, input3);
   let scoreHtml = ` <td>${input1}</td>
  <td>${input2}</td>
  <td>${input3}</td>
- `
+ `;
  scoreTable.innerHTML += scoreHtml;
 } else {
+  frameArray.push(input1, input2);
 let scoreHtml = ` <td>${input1}</td>
  <td>${input2}</td>
  `
  scoreTable.innerHTML += scoreHtml;
 }
-checkLastValue();
 }
 
-function checkLastValue() {
-let scores = document.getElementById("score-column").children;
-let previous = scores[scores.length - 1]
- if (previous === "X") {
-     handleFrameAfterStrike();
-  } else if (previous === "/") {
-     handleFrameAfterSpare();
-  } else {
-    incrementScore();
-  }
-}
+
 
 function incrementScore() {
 let integers = frameArray.map(function (y) {
