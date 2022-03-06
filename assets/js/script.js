@@ -7,10 +7,11 @@ let frameArray = [];
 
 function countAttempt(event) {
   event.preventDefault();
+  logScore();
   if (frames === 8) {
     console.log("9 frames bowled");
-    handle10thFrame();
     frames++;
+    handle10thFrame();
   } else if (frames < maxFrames) {
     frames++;
     console.log("frame bowled");
@@ -18,7 +19,6 @@ function countAttempt(event) {
     console.log("10 frames bowled");
     finishGame();
   }
-  logScore();
 }
 
 function logScore() {
@@ -54,7 +54,7 @@ let input1 = document.getElementById("attempt-1-input").value;
  `
   scoreTable.innerHTML += scoreHtml;
 }
-checkScore();
+score();
 }
 
 function checkScore() {
@@ -94,9 +94,9 @@ function scoreStrikeAfterStrike() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = last + penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
@@ -113,9 +113,9 @@ function scoreSpareAfterStrike() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = last + penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
@@ -132,15 +132,15 @@ function scoreAfterStrike() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = last + penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
- <td colspan="2">${totalScore}</td>
+ <td colspan="2">test</td> <td colspan="2">${totalScore}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -151,9 +151,9 @@ function scoreStrikeAfterSpare() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
@@ -170,9 +170,9 @@ function scoreSpareAfterSpare() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
@@ -189,17 +189,51 @@ function scoreAfterSpare() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
   let previousFrame = penultimate + thirdFromLast;
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
-  <td colspan="2">${totalScore}</td>
+  <td colspan="2">test</td> <td colspan="2">${totalScore}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
+}
+
+function scoreStrike() {
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
+  if (frames === 9) {
+  let mostRecentFrame = thirdFromLast + last + penultimate;
+  totalScore += mostRecentFrame;
+  } else {
+  let mostRecentFrame = last + penultimate;
+  totalScore += mostRecentFrame;
+}
+}
+
+function scoreSpare() {
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = integers.slice(-1);
+  let penultimate = integers.slice(-2, -1);
+  let thirdFromLast = integers.slice(-3, -2);
+  if (frames === 9) {
+  let mostRecentFrame = thirdFromLast + last + penultimate;
+  totalScore += mostRecentFrame;
+  } else {
+  let mostRecentFrame = last + penultimate;
+  totalScore += mostRecentFrame;
+}
 }
 
 function score() {
