@@ -75,7 +75,7 @@ else if (previousScore === "10 strike") {
 } else if (secondLastScore === "10 spare") {
   scoreCaseAfterSpare();
 } else {
-  scoreStrike();
+  scoreStrikeOrSpare();
 }
   } else if (previousScore === "10 spare") {
    if (secondLastScore === "10 strike") {
@@ -87,7 +87,7 @@ else if (previousScore === "10 strike") {
 } else if (secondLastScore === "10 spare") {
     scoreCaseAfterSpare();
 } else {
-    scoreSpare();
+    scoreStrikeOrSpare();
 }
   } else {
  if (thirdLastScore === "10 strike") {
@@ -209,15 +209,14 @@ function scoreCaseAfterSpare() {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
-  let previousFrame = penultimate + thirdFromLast;
-  totalScore += previousFrame;
   let cumulativeHtml = `
   <td colspan="2">${totalScore}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1))
+  let score = last + penultimate;
+  totalScore += score;
 }
 
 function scoreAfterSpare() {
@@ -239,18 +238,8 @@ function scoreAfterSpare() {
   cumulativeScore.innerHTML += cumulativeHtml;
 }
 
-function scoreStrike() {
-  console.log("strike after attempt");
-  let integers = frameArray.map(function (y) {
-    return parseInt(y, 10);
-  });
-  console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  totalScore += last;
-}
-
-function scoreSpare() {
-  console.log("spare after attempt");
+function scoreStrikeOrSpare() {
+  console.log("strike/spare after attempt");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
