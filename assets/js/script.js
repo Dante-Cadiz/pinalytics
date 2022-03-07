@@ -110,15 +110,7 @@ else if (last === 10) {
 
 function scoreDouble() {
   console.log("double");
-  let integers = frameArray.map(function (y) {
-    return parseInt(y, 10);
-  });
-  console.log(integers);
-  let last = parseInt(integers.slice(-1));
-  let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
-  let previousFrame = last + penultimate + thirdFromLast;
-  totalScore += previousFrame;
+  totalScore += 10;
 }
 
 function scoreSpareAfterStrike() {
@@ -148,12 +140,13 @@ function scoreAfterStrike() {
   console.log(integers);
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1));
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
-  let previousFrame = last + penultimate + thirdFromLast;
-  totalScore += previousFrame;
+  totalScore += last;
+  totalScore += penultimate;
+  totalScore += last;
+  totalScore += penultimate;
   let cumulativeHtml = `
- <td colspan="2">test</td> <td colspan="2">${totalScore}</td>
- `;
+ <td colspan="2">${totalScore - (last + penultimate)}</td> <td colspan="2">${totalScore}</td>
+  `
   cumulativeScore.innerHTML += cumulativeHtml;
 }
 
@@ -170,7 +163,7 @@ function scoreTurkey() {
   let turkey = last + penultimate + thirdFromLast;
   totalScore += turkey;
   let cumulativeHtml = `
- <td colspan="2">test</td>
+ <td colspan="2">${totalScore - (last + penultimate)}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -216,7 +209,6 @@ function scoreCaseAfterSpare() {
   console.log(integers);
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1))
-  let thirdFromLast = parseInt(integers.slice(-3, -2));
   totalScore += penultimate;
   let cumulativeHtml = `
   <td colspan="2">${totalScore}</td>
