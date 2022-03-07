@@ -25,7 +25,15 @@ function logScore() {
 let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
    let scoreTable = document.getElementById("score-column");
-   if (input1 === "X") {
+   if (frames === 9) {
+  let input3 = document.getElementById("attempt-3-input").value;
+  frameArray.push(input1, input2, input3);
+  let scoreHtml = ` <td class="attempt1-score">${input1}</td>
+ <td class="attempt2-score">${input2}</td>
+ <td class="attempt3-score">${input3}</td>
+ `
+ scoreTable.innerHTML += scoreHtml;
+   } else if (input1 === "X") {
      frameArray.push("10 strike");
      console.log("strike");
      let scoreHtml = ` <td class="attempt1-score"></td>
@@ -39,48 +47,55 @@ let input1 = document.getElementById("attempt-1-input").value;
  <td class="attempt2-score">${input2}</td>
  `
      scoreTable.innerHTML += scoreHtml;
-  }else if (frames === 9) {
-  let input3 = document.getElementById("attempt-3-input").value;
-  frameArray.push(input1, input2, input3);
-  let scoreHtml = ` <td class="attempt1-score">${input1}</td>
- <td class="attempt2-score">${input2}</td>
- <td class="attempt3-score">${input3}</td>
- `
- scoreTable.innerHTML += scoreHtml;
-} else {
+  } else {
   frameArray.push(input1, input2);
   let scoreHtml = ` <td class="attempt1-score">${input1}</td>
  <td class="attempt2-score">${input2}</td>
  `
   scoreTable.innerHTML += scoreHtml;
 }
-score();
+checkScore();
 }
 
 function checkScore() {
   let previousScore = frameArray[frameArray.length -1];
   let secondLastScore = frameArray[frameArray.length -2];
   let thirdLastScore = frameArray[frameArray.length -3];
-if (previousScore === "10 strike") {
+  let fourthLastScore = frameArray[frameArray.length -4];
+  if (frames === 9) {
+    score10thFrame();
+  }
+else if (previousScore === "10 strike") {
   if (secondLastScore === "10 strike") {
-  scoreStrikeAfterStrike();
+    if (thirdLastScore === "10 strike") {
+      scoreTurkey();
+    } else { 
+      scoreDouble();
+    }
 } else if (secondLastScore === "10 spare") {
-  scoreStrikeAfterSpare();
+  scoreCaseAfterSpare();
 } else {
   scoreStrike();
 }
   } else if (previousScore === "10 spare") {
    if (secondLastScore === "10 strike") {
+     if (thirdLastScore === "10 strike") {
+      scoreSpareAfter2Strikes();
+     } else {
     scoreSpareAfterStrike();
+     }
 } else if (secondLastScore === "10 spare") {
-    scoreSpareAfterSpare();
+    scoreCaseAfterSpare();
 } else {
     scoreSpare();
 }
   } else {
- if (thirdLastScore = "10 strike") {
-    scoreAfterStrike();
-} else if (thirdLastScore = "10 spare") {
+ if (thirdLastScore === "10 strike") {
+   if (fourthLastScore === "10 strike") {
+      scoreAfter2Strikes();
+     } else {
+    scoreAfterStrike(); }
+} else if (thirdLastScore === "10 spare") {
     scoreAfterSpare();
 } else {
     score();
@@ -88,37 +103,30 @@ if (previousScore === "10 strike") {
   }
 }
 
-function scoreStrikeAfterStrike() {
-  let cumulativeScore = document.getElementById("cumulative-score");
+function scoreDouble() {
+  console.log("double");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
   let previousFrame = last + penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
   totalScore += previousFrame;
-  let cumulativeHtml = `
- <td colspan="2">${totalScore}</td>
- `;
-  cumulativeScore.innerHTML += cumulativeHtml;
 }
 
 function scoreSpareAfterStrike() {
+  console.log("spare after strike");
   let cumulativeScore = document.getElementById("cumulative-score");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
   let previousFrame = last + penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
  <td colspan="2">${totalScore}</td>
@@ -127,17 +135,16 @@ function scoreSpareAfterStrike() {
 }
 
 function scoreAfterStrike() {
+  console.log("attempt after strike");
   let cumulativeScore = document.getElementById("cumulative-score");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
   let previousFrame = last + penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
  <td colspan="2">test</td> <td colspan="2">${totalScore}</td>
@@ -145,37 +152,67 @@ function scoreAfterStrike() {
   cumulativeScore.innerHTML += cumulativeHtml;
 }
 
-function scoreStrikeAfterSpare() {
+function scoreTurkey() {
+  console.log("turkey");
  let cumulativeScore = document.getElementById("cumulative-score");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
-  let previousFrame = penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
-  totalScore += previousFrame;
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let turkey = last + penultimate + thirdFromLast;
+  totalScore += turkey;
   let cumulativeHtml = `
-  <td colspan="2">${totalScore}</td>
+ <td colspan="2">test</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
 
-function scoreSpareAfterSpare() {
+function scoreSpareAfter2Strikes() {
+  console.log("spare after 2 strikes");
+  let cumulativeScore = document.getElementById("cumulative-score");
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let cumulativeHtml = `
+ <td colspan="2">test</td><td colspan="2">test</td>
+ `;
+  cumulativeScore.innerHTML += cumulativeHtml;
+}
+
+function scoreAfter2Strikes() {
+  console.log("attempt after 2 strikes");
+  let cumulativeScore = document.getElementById("cumulative-score");
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let cumulativeHtml = `
+ <td colspan="2">test</td><td colspan="2">test</td><td colspan="2">test</td>
+ `;
+  cumulativeScore.innerHTML += cumulativeHtml;
+}
+
+function scoreCaseAfterSpare() {
+  console.log("strike/spare after spare");
  let cumulativeScore = document.getElementById("cumulative-score");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
   console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
   let previousFrame = penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
   totalScore += previousFrame;
   let cumulativeHtml = `
   <td colspan="2">${totalScore}</td>
@@ -184,59 +221,8 @@ function scoreSpareAfterSpare() {
 }
 
 function scoreAfterSpare() {
+  console.log("attempt after spare");
  let cumulativeScore = document.getElementById("cumulative-score");
-  let integers = frameArray.map(function (y) {
-    return parseInt(y, 10);
-  });
-  console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
-  let previousFrame = penultimate + thirdFromLast;
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
-  totalScore += previousFrame;
-  let cumulativeHtml = `
-  <td colspan="2">test</td> <td colspan="2">${totalScore}</td>
- `;
-  cumulativeScore.innerHTML += cumulativeHtml;
-}
-
-function scoreStrike() {
-  let integers = frameArray.map(function (y) {
-    return parseInt(y, 10);
-  });
-  console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
-  if (frames === 9) {
-  let mostRecentFrame = thirdFromLast + last + penultimate;
-  totalScore += mostRecentFrame;
-  } else {
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
-}
-}
-
-function scoreSpare() {
-  let integers = frameArray.map(function (y) {
-    return parseInt(y, 10);
-  });
-  console.log(integers);
-  let last = integers.slice(-1);
-  let penultimate = integers.slice(-2, -1);
-  let thirdFromLast = integers.slice(-3, -2);
-  if (frames === 9) {
-  let mostRecentFrame = thirdFromLast + last + penultimate;
-  totalScore += mostRecentFrame;
-  } else {
-  let mostRecentFrame = last + penultimate;
-  totalScore += mostRecentFrame;
-}
-}
-
-function score() {
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
   });
@@ -244,15 +230,44 @@ function score() {
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1));
   let thirdFromLast = parseInt(integers.slice(-3, -2));
-  let cumulativeScore = document.getElementById("cumulative-score");
-  if (frames === 9) {
-  let mostRecentFrame = thirdFromLast + last + penultimate;
+  let previousFrame = penultimate + thirdFromLast;
+  let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
   let cumulativeHtml = `
- <td colspan="3">${totalScore}</td>
+  <td colspan="2"></td> <td colspan="2">${totalScore}</td>
  `;
- cumulativeScore.innerHTML += cumulativeHtml;
-  } else {
+  cumulativeScore.innerHTML += cumulativeHtml;
+}
+
+function scoreStrike() {
+  console.log("strike after attempt");
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  totalScore += last;
+}
+
+function scoreSpare() {
+  console.log("spare after attempt");
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  totalScore += last;
+}
+
+function score() {
+  console.log("attempt after attempt");
+  let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let cumulativeScore = document.getElementById("cumulative-score");
   let mostRecentFrame = last + penultimate;
   totalScore += mostRecentFrame;
   let cumulativeHtml = `
@@ -260,10 +275,6 @@ function score() {
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
-}
-
-
-
 
 
 
@@ -279,6 +290,10 @@ function handle10thFrame() {
             <input type="submit" value="Record Score"></input>
      `;
      form.innerHTML = html;
+}
+
+function score10thFrame() {
+console.log("scoring 10th frame");
 }
 
 function finishGame() {
