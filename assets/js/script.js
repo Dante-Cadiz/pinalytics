@@ -77,19 +77,19 @@ else if (last === 10) {
     } else { 
       scoreDouble();
     }
-} else if (penultimate + thirdFromLast === 10) {
+} else if (penultimate + thirdFromLast === 10 && penultimate != 0) {
   scoreStrikeAfterSpare();
 } else {
   scoreStrikeOrSpare();
 }
-  } else if (last + penultimate === 10) {
+  } else if (last + penultimate === 10 && last != 0) {
    if (thirdFromLast === 10) {
      if (fourthFromLast === 10) {
       scoreSpareAfter2Strikes();
      } else {
     scoreSpareAfterStrike();
      }
-} else if (thirdFromLast + fourthFromLast === 10) {
+} else if (thirdFromLast + fourthFromLast === 10 && thirdFromLast != 0) {
     scoreSpareAfterSpare();
 } else {
     scoreStrikeOrSpare();
@@ -100,7 +100,7 @@ else if (last === 10) {
       scoreAfter2Strikes();
      } else {
     scoreAfterStrike(); }
-} else if (thirdFromLast + fourthFromLast === 10) {
+} else if (thirdFromLast + fourthFromLast === 10 && thirdFromLast != 0) {
     scoreAfterSpare();
 } else {
     score();
@@ -227,7 +227,7 @@ function scoreStrikeAfterSpare() {
 }
 
 function scoreSpareAfterSpare() {
-  console.log("strike after spare");
+  console.log("spare after spare");
  let cumulativeScore = document.getElementById("cumulative-score");
   let integers = frameArray.map(function (y) {
     return parseInt(y, 10);
@@ -236,12 +236,12 @@ function scoreSpareAfterSpare() {
   let last = parseInt(integers.slice(-1));
   let penultimate = parseInt(integers.slice(-2, -1))
   totalScore += penultimate;
+  totalScore += last;
+  totalScore += penultimate;
   let cumulativeHtml = `
-  <td colspan="2">${totalScore}</td>
+  <td colspan="2">${totalScore - (last + penultimate)}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
-  let score = last + penultimate;
-  totalScore += score;
 }
 
 function scoreAfterSpare() {
@@ -301,6 +301,15 @@ function handle10thFrame() {
 
 function score10thFrame() {
 console.log("scoring 10th frame");
+ let integers = frameArray.map(function (y) {
+    return parseInt(y, 10);
+  });
+  console.log(integers);
+  let last = parseInt(integers.slice(-1));
+  let penultimate = parseInt(integers.slice(-2, -1));
+  let thirdFromLast = parseInt(integers.slice(-3, -2));
+  let fourthFromLast = parseInt(integers.slice(-4, -3));
+  let fifthFromLast = parseInt(integers.slice(-5, -4));
 }
 
 function finishGame() {
