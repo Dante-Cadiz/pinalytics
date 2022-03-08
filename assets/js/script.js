@@ -267,6 +267,9 @@ console.log("scoring 10th frame");
  let last = parseInt(frameArray.slice(-1));
   let penultimate = parseInt(frameArray.slice(-2, -1));
   let thirdFromLast = parseInt(frameArray.slice(-3, -2));
+  if (last + penultimate < 10 && )
+  totalScore += last;
+  totalScore += penultimate;
 }
 
 function finishGame() {
