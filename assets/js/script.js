@@ -58,7 +58,6 @@ let input1 = document.getElementById("attempt-1-input").value;
  scoreTable.innerHTML += scoreHtml;
    } else if (input1 === "X") {
      frameArray.push(10);
-     console.log("strike");
      let scoreHtml = ` <td class="attempt1-score"></td>
  <td class="attempt2-score">${input1}</td>
  `
@@ -66,7 +65,6 @@ let input1 = document.getElementById("attempt-1-input").value;
   } else if (input2 === "/") {
     let spareHandler = 10 - integerInput1;
      frameArray.push(integerInput1, spareHandler);
-     console.log("spare");
      let scoreHtml = ` <td class="attempt1-score">${input1}</td>
  <td class="attempt2-score">/</td>
  `
@@ -139,10 +137,11 @@ function scoreSpareAfterStrike() {
   let last = parseInt(frameArray.slice(-1));
   let penultimate = parseInt(frameArray.slice(-2, -1));
   let thirdFromLast = parseInt(frameArray.slice(-3, -2));
-  let previousFrame = last + penultimate + thirdFromLast;
-  totalScore += previousFrame;
+  totalScore += last;
+  totalScore += penultimate;
+  totalScore += thirdFromLast;
   let cumulativeHtml = `
- <td colspan="2">${totalScore}</td>
+ <td colspan="2">${totalScore - (last + penultimate)}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -188,7 +187,7 @@ function scoreSpareAfter2Strikes() {
   totalScore += penultimate;
   totalScore += last;
   let cumulativeHtml = `
- <td colspan="2">${totalScore - (last + thirdFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - (last)}</td>
+ <td colspan="2">${totalScore - (last + thirdFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - last}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -215,9 +214,13 @@ function scoreStrikeAfterSpare() {
   console.log("strike after spare");
  let cumulativeScore = document.getElementById("cumulative-score");
   let last = parseInt(frameArray.slice(-1));
+  let penultimate = parseInt(frameArray.slice(-2, -1));
+  let thirdFromLast = parseInt(frameArray.slice(-3, -2));
   totalScore += last;
+  totalScore += penultimate;
+  totalScore += thirdFromLast;
   let cumulativeHtml = `
-  <td colspan="2">${totalScore}</td>
+  <td colspan="2">${totalScore - last}</td>
  `;
   cumulativeScore.innerHTML += cumulativeHtml;
 }
@@ -241,9 +244,9 @@ function scoreAfterSpare() {
  let cumulativeScore = document.getElementById("cumulative-score");
   let last = parseInt(frameArray.slice(-1));
   let penultimate = parseInt(frameArray.slice(-2, -1));
+  totalScore += penultimate;
+  totalScore += penultimate;
   totalScore += last;
-  totalScore += penultimate;
-  totalScore += penultimate;
   let cumulativeHtml = `
   <td colspan="2">${totalScore - (last + penultimate)}</td><td colspan="2">${totalScore}</td>
  `;
@@ -305,12 +308,11 @@ let cumulativeScore = document.getElementById("cumulative-score");
       `
       cumulativeScore.innerHTML += cumulativeHtml;
     } else {
-      totalScore += fourthFromLast;
       totalScore += last;
       totalScore += thirdFromLast;
       totalScore += penultimate;
       let cumulativeHtml = `
- <td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td> <td colspan="2">${totalScore}</td>
+ <td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td> <td colspan="3">${totalScore}</td>
   `
   cumulativeScore.innerHTML += cumulativeHtml;
     }
