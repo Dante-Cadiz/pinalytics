@@ -48,3 +48,8 @@ table, th, td {
 #cumulative-score {
     height:50px;
 }
+
+#final-score {
+    font-size: 30px;
+    margin: 0 auto;
+}

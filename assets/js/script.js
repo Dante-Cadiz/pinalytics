@@ -29,7 +29,12 @@ let input1 = document.getElementById("attempt-1-input").value;
    let scoreTable = document.getElementById("score-column");
    if (frames === 9) {
   let input3 = document.getElementById("attempt-3-input").value;
-  frameArray.push(input1, input2, input3);
+  if (input3 === "") {
+    frameArray.push(integerInput1, integerInput2, 0);
+  } else {
+  let integerInput3 = parseInt(input3);
+  frameArray.push(integerInput1, integerInput2, integerInput3);
+  }
   let scoreHtml = ` <td class="attempt1-score">${input1}</td>
  <td class="attempt2-score">${input2}</td>
  <td class="attempt3-score">${input3}</td>
@@ -267,15 +272,30 @@ console.log("scoring 10th frame");
  let last = parseInt(frameArray.slice(-1));
   let penultimate = parseInt(frameArray.slice(-2, -1));
   let thirdFromLast = parseInt(frameArray.slice(-3, -2));
-  if (last + penultimate < 10 && )
+  let cumulativeScore = document.getElementById("cumulative-score");
   totalScore += last;
   totalScore += penultimate;
+  totalScore += thirdFromLast;
+  let cumulativeHtml = `
+ <td colspan="3">${totalScore}</td>
+ `;
+  cumulativeScore.innerHTML += cumulativeHtml;
 }
 
 function finishGame() {
   let formDiv = document.getElementById("form-wrapper");
   let html = `
-  <button type="button" id="button">Log Game</button>
+  <button type="button" id="final-button">Log Game</button>
   `
   formDiv.innerHTML = html;
+  let button = document.getElementById("final-button");
+button.addEventListener("click", postFinalScore);
+}
+
+function postFinalScore() {
+ let scoreTable = document.getElementById("score-column");
+ let finalScoreHtml = `
+ <td rowspan="2" id="final-score">${totalScore}</td>
+ `;
+ scoreTable.innerHTML += finalScoreHtml;
 }
