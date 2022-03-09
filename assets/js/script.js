@@ -9,9 +9,23 @@ function checkValidInput(event) {
   event.preventDefault();
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
+  let input3 = document.getElementById("attempt-3-input").value;
   let integerInput1 = parseInt(input1);
   let integerInput2 = parseInt(input2);
-  if (integerInput1 < 0 || integerInput2 < 0 || integerInput1 + integerInput2 > 9) {
+  let integerInput3 = parseInt(input3);
+  if (frames === 9) {
+    if (integerInput1 < 0 || integerInput2 < 0 || integerInput1 + integerInput2 > 9 || integerInput2 + integerInput3 > 9) {
+      alert("Invalid input");
+     return; 
+    } else if (input2 === "/" || input3 === "/" || input1 === "X" || input2 === "X" || input3 ==="X") {
+      countAttempt();
+    } else if (isNaN(integerInput1) || isNaN(integerInput2) || isNaN (integerInput3)) {
+      alert("Invalid input");
+     return; 
+    } else {
+      countAttempt();
+    }
+  } else if  (integerInput1 < 0 || integerInput2 < 0 || integerInput1 + integerInput2 > 9) {
      alert("Invalid input");
      return; 
   }
@@ -114,7 +128,7 @@ else if (last === 10) {
     } else { 
       scoreDouble();
     }
-} else if (penultimate + thirdFromLast === 10) {
+} else if (penultimate + thirdFromLast === 10 && penultimate > 0) {
   scoreStrikeAfterSpare();
 } else {
   scoreStrikeOrSpare();
@@ -274,6 +288,7 @@ function scoreAfterSpare() {
 }
 
 function scoreStrikeOrSpare() {
+  console.log("strike or spare")
   totalScore += 10;
 }
 
@@ -301,7 +316,7 @@ function handle10thFrame() {
             <input type="text" id="attempt-2-input" name="attempt-2-input">
             <label for="attempt-3-input">Attempt 3</label>
             <input type="text" id="attempt-3-input" name="attempt-3-input">
-            <input type="submit" value="Record Score"></input>
+            <input type="submit" id="frame-10-submit" value="Record Score"></input>
      `;
      form.innerHTML = html;
 }
