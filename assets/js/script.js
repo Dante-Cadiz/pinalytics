@@ -9,18 +9,21 @@ function checkValidInput(event) {
   event.preventDefault();
   let input1 = document.getElementById("attempt-1-input").value;
   let input2 = document.getElementById("attempt-2-input").value;
-  let input3 = document.getElementById("attempt-3-input").value;
   let integerInput1 = parseInt(input1);
   let integerInput2 = parseInt(input2);
-  let integerInput3 = parseInt(input3);
   if (frames === 9) {
-    if (integerInput1 < 0 || integerInput2 < 0 || integerInput1 + integerInput2 > 9 || integerInput2 + integerInput3 > 9) {
+    let input3 = document.getElementById("attempt-3-input").value;
+    let integerInput3 = parseInt(input3);
+    if (integerInput1 < 0 || integerInput2 < 0 || integerInput3 < 0 || integerInput1 + integerInput2 > 9 || integerInput2 + integerInput3 > 9) {
       alert("Invalid input");
      return; 
     } else if (input2 === "/" || input3 === "/" || input1 === "X" || input2 === "X" || input3 ==="X") {
       countAttempt();
     } else if (isNaN(integerInput1) || isNaN(integerInput2) || isNaN (integerInput3)) {
       alert("Invalid input");
+     return; 
+    } else if (integerInput1 + integerInput2 < 10 && integerInput3 > 0) {
+       alert("Invalid input");
      return; 
     } else {
       countAttempt();
