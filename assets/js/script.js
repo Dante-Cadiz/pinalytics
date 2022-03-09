@@ -334,11 +334,11 @@ let cumulativeScore = document.getElementById("cumulative-score");
   let seventhFromLast = parseInt(frameArray.slice(-7, -6))
   totalScore += thirdFromLast;
   totalScore += penultimate;
+  totalScore += last;
   if (fifthFromLast === 10) { 
     if (seventhFromLast === 10) {
       totalScore += fifthFromLast;
       totalScore += seventhFromLast;
-      totalScore += last;
       totalScore += thirdFromLast;
       totalScore += penultimate;
       let cumulativeHtml = `
@@ -346,7 +346,6 @@ let cumulativeScore = document.getElementById("cumulative-score");
       `
       cumulativeScore.innerHTML += cumulativeHtml;
     } else {
-      totalScore += last;
       totalScore += thirdFromLast;
       totalScore += penultimate;
       let cumulativeHtml = `
@@ -356,7 +355,6 @@ let cumulativeScore = document.getElementById("cumulative-score");
     }
   } else if (fourthFromLast + fifthFromLast === 10 && fourthFromLast !=0) {
     totalScore += thirdFromLast;
-    totalScore += last;
   let cumulativeHtml = `
   <td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td><td colspan="3">${totalScore}</td>
  `;
