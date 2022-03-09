@@ -1,12 +1,31 @@
 let frameSubmit = document.getElementById("frame-submit");
-frameSubmit.addEventListener("submit", countAttempt);
+frameSubmit.addEventListener("submit", checkValidInput);
 let frames = 0;
 let maxFrames = 9;
 let totalScore = 0;
 let frameArray = [];
 
-function countAttempt(event) {
+function checkValidInput(event) {
   event.preventDefault();
+  let input1 = document.getElementById("attempt-1-input").value;
+  let input2 = document.getElementById("attempt-2-input").value;
+  let integerInput1 = parseInt(input1);
+  let integerInput2 = parseInt(input2);
+  if (integerInput1 < 0 || integerInput2 < 0 || integerInput1 + integerInput2 > 9) {
+     alert("Invalid input");
+     return; 
+  }
+  else if ((input1 === "X" && input2 === "") || input2 === "/") {
+    countAttempt();
+   } else if (isNaN(integerInput1) || isNaN(integerInput2) ) {
+     alert("Invalid input");
+     return; 
+   } else {
+     countAttempt();
+   }
+} 
+
+function countAttempt() {
   logScore();
   if (frames === 8) {
     console.log("9 frames bowled");
@@ -20,6 +39,7 @@ function countAttempt(event) {
     finishGame();
   }
 }
+
 
 function logScore() {
 let input1 = document.getElementById("attempt-1-input").value;
