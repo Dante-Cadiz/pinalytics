@@ -15,3 +15,9 @@ Pinalytics is an interactive bowling scorecard that records and increments score
     - Cumulative score row
         - 
 
+## Bugs
+
+## Deployment
+
+## Credits
+
