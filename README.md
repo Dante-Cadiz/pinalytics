@@ -1,8 +1,11 @@
 # Pinalytics
 
-Pinalytics is an interactive bowling scorecard that records and increments scores frame by frame in accordance with the official rule set of 10 pin bowling. 
+Pinalytics is an interactive bowling scorecard that records and increments scores provided by user inputs frame by frame in accordance with the official rule set of 10 pin bowling. It is intended for use by bowlers while they are playing their games.
 
 ## Features
+
+- Visual design
+    - The site has a relatively minimal design, ensuring ease of use and avoiding superfluous content detracting from functionality.
 
 - User input field
     - The user inputs their score each frame, consisting of 2 attempts. To signify a strike (successfully knocking over all 10 pins on the first attempt), the user types an "X" in the first input field. For a spare (successfully knocking over all 10 pins within 2 attempts), the user types a "/" in the second input field, along with the score of their first attempt. 
@@ -26,12 +29,23 @@ Pinalytics is an interactive bowling scorecard that records and increments score
 if (input1 === "X") {
         frameArray.push(10, 0);
 ```
-- This second empty value of 0 allowed the calculating functions to differentiate between strike and spare better, by fixing the position of the 10 value that signified a strike.
+- This second empty value of 0 allowed the calculating functions to differentiate between strike and spare better, by fixing the position of the 10 value that signified a strike within the array of scores and thus allowing the score-incrementing functions to iterate through the array correctly.
+
 
 
 ## Deployment
 
-- I deployed this site via GitHub Pages
+- I deployed this site via GitHub Pages. Within the GitHub repository for this project, I navigated to the Pages section of the Settings tab and selected the main branch.
+- Once that is done, the deployed version of the site is available at https://dante-cadiz.github.io/pinalytics/
 
 ## Credits
 
+- The advice of my Code Institute mentor Sandeep Aggarwal was invaluable in shaping my approach to building this site.
+- No code is directly lifted from external sources.
+
+## Notes
+
+- Due to the time constraints of this development process, the site does not have all the features that I initially planned for it to have.
+- In future, I would like to add an undo button that allows the user to erase their previous entry and amend it should they enter wrong data.
+- I would also like to add a feature that logs scores on completion of each full game and calculates high score and mean score.
+- Late in the development process, I was advised that there was a more efficient and 'cleaner' way of calculating total score that used less lines of code - namely following the 'sliding window' paradigm to iterate through the array of scores by creating sub-arrays. 

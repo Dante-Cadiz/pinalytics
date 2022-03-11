@@ -1,23 +1,19 @@
-body{ 
+body{
     font-family: 'Raleway', sans-serif;
 }
-
 h1 {
     text-align: center;
     font-family: 'Fredoka', sans-serif;
     font-size: 300%;
 }
-
 table {
     width: 100%;
 }
-
 table, th, td {
     border: 1px solid #000000;
     border-collapse: collapse;
     table-layout: fixed;
-} 
-
+}
 footer {
     position: absolute;
     bottom: 0;
@@ -26,23 +22,20 @@ footer {
     background-color: #FFFF80;
     text-align: center;
 }
-
 .instructions-div {
     width: 60%;
     background-color: #FFFF80;
     margin: 0 auto;
     padding: 0.5rem 1rem 0.5rem;
 }
-
 .submit-button {
-  color: #FF0000;
-  font-family: 'Fredoka', sans-serif;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin: 1rem;
+    color: #FF0000;
+    font-family: 'Fredoka', sans-serif;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 1rem;
 }
-
 #form-wrapper {
     width: 60%;
     background-color: #FFFF80;
@@ -50,49 +43,39 @@ footer {
     padding: 1rem;
     margin-bottom: 1rem;
 }
-
 #form-div {
     width: 50%;
     background-color: #FFFF80;
     margin: auto;
 }
-
 #score-column td, #cumulative-score td {
     text-align: right;
     padding-right: 5px;
 }
-
 .total-header {
     width: 10%;
 }
-
 #score-column {
     height: 3rem;
 }
-
 #cumulative-score {
     height: 3rem;
 }
-
 #final-score {
     font-size: 30px;
     margin: 0 auto;
 }
-
 @media screen and (max-width: 600px) {
     footer{
         height:5rem;
-    }
-
+   }
     .instructions-div {
         width: 100%;
-    }
-
+   }
     #form-wrapper {
         width: 100%;
-    }
-
+   }
     .total-header {
         width: 15%;
-    }
-  }
+   }
+}
