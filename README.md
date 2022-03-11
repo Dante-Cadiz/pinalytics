@@ -46,7 +46,7 @@ if (input1 === "X") {
 - The following metrics were returned:
     - There are 19 functions in this file.
     - Function with the largest signature take 1 arguments, while the median is 0.
-    - Largest function has 34 statements in it, while the median is 9.
+    - Largest function has 35 statements in it, while the median is 8.
     - The most complex function has a cyclomatic complexity value of 24 while the median is 1.
 
 ## Deployment

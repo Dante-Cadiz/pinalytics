@@ -7,7 +7,7 @@ let totalScore = 0;
 let frameArray = [];
 
 // checks whether the input provided by the user is a valid bowling score
-function checkValidInput(event) { 
+function checkValidInput(event) {
     event.preventDefault();
     let input1 = document.getElementById("attempt-1-input").value;
     let input2 = document.getElementById("attempt-2-input").value;
@@ -74,9 +74,9 @@ function logScore() {
                 if (input3 === "X") {
                     frameArray.push(10, 10, 10);
                 } else {
-                    frameArray.push(10, 10, integerInput3);     
+                    frameArray.push(10, 10, integerInput3);
                 }
-        } else if (input3 === "/") {
+            } else if (input3 === "/") {
                 let spareHandler = 10 - integerInput2;
                 frameArray.push(10, integerInput2, spareHandler);
             } else {
@@ -225,7 +225,7 @@ function scoreSpareAfter2Strikes() {
     let fourthFromLast = parseInt(frameArray.slice(-4, -3));
     totalScore += fourthFromLast;
     totalScore += sixthFromLast;
-    totalScore += (2*penultimate);
+    totalScore += (2 * penultimate);
     totalScore += last;
     let cumulativeHtml = `
  <td colspan="2">${totalScore - (last + sixthFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - (last + penultimate)}</td>
@@ -341,7 +341,7 @@ function score10thFrame() {
     if (fifthFromLast === 10) {
         if (seventhFromLast === 10) {
             totalScore += fifthFromLast;
-            totalScore += (2* thirdFromLast);
+            totalScore += (2 * thirdFromLast);
             totalScore += penultimate;
             let cumulativeHtml = `
       <td colspan="2">${totalScore - (fifthFromLast + 2*(penultimate + thirdFromLast) + last)}</td><td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td><td colspan="3">${totalScore}</td>
@@ -387,4 +387,3 @@ function postFinalScore() {
  `;
     scoreTable.innerHTML += finalScoreHtml;
 }
-
