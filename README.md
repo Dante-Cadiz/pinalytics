@@ -2,19 +2,26 @@
 
 Pinalytics is an interactive bowling scorecard that records and increments scores provided by user inputs frame by frame in accordance with the official rule set of 10 pin bowling. This application uses JavaScript to calculate bowling scores and post them to the DOM in a constantly updating and responsive scoreboard table for the user. It is intended for use by bowlers while they are playing their games, allowing them to automatically calculate their scores instead of having to use a pen-and-paper scoresheet and mental maths.
 
+![demonstrating responsive design](https://i.imgur.com/mZ6xCdL.png)
+
 ## Features
 
 - Visual design
     - The site has a relatively minimal design, ensuring ease of use and avoiding superfluous content detracting from functionality.
-    - Heading
+    - It uses two synergetic and easy to read fonts.
+    - It contains a simple heading and clearly visible user instructions. 
+    - The submit button is clearly identifiable with a bold red colour.
+
+![user input field and instructions](https://i.imgur.com/HpuuF6i.png)
 
 - User input field
     - The user inputs their score each frame, consisting of 2 attempts. To signify a strike (successfully knocking over all 10 pins on the first attempt), the user types an "X" in the first input field. For a spare (successfully knocking over all 10 pins within 2 attempts), the user types a "/" in the second input field, along with the score of their first attempt. The above parameters are provided as instructions to the user to ensure proper use.
-    - The submit button is clearly identifiable with a bold red colour.
     - Upon submission, these inputs are converted to integer values and stored in an array which is subsequently used to calculate the player's total score round by round. 
     - For the special case of the 10th frame in which the player may gain an extra third attempt if they score a strike or a spare, the form's HTML is updated by a JavaScript function which allows the user to input this possible third attempt. 
     - Defensive design tools are implemented in order to assure that only valid inputs are entered at all times, namely the checkValidInput(); function which triggers before any other upon form submission.
     - Once 10 frames have been completed, the user is able to log their total score to the final column on the right of the table below. 
+
+![scoresheet updating as the user plays](https://i.imgur.com/TryojF0.png)
 
 - Score table
     - Basic score row
@@ -57,7 +64,6 @@ if (input1 === "X") {
 ## Credits
 
 - The advice of my Code Institute mentor Sandeep Aggarwal was invaluable in shaping my approach to building this site.
-- No code is directly lifted from external sources.
 
 ## Notes
 
