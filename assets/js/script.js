@@ -73,11 +73,13 @@ function logScore() {
                 if (input3 === "X") {
                     frameArray.push(10, 10, 10);
                 } else {
-                    frameArray.push(10, 10, integerInput1);
+                    frameArray.push(10, 10, integerInput3);     
                 }
-            } else if (input3 === "/") {
+        } else if (input3 === "/") {
                 let spareHandler = 10 - integerInput2;
                 frameArray.push(10, integerInput2, spareHandler);
+            } else {
+                frameArray.push(10, integerInput2, integerInput3);
             }
         } else if (input2 === "/") {
             let spareHandler = 10 - integerInput1;
@@ -336,10 +338,10 @@ function score10thFrame() {
     if (fifthFromLast === 10) {
         if (seventhFromLast === 10) {
             totalScore += fifthFromLast;
-            totalScore += seventhFromLast;
-            totalScore += thirdFromLast;
+            totalScore += (2* thirdFromLast);
+            totalScore += penultimate;
             let cumulativeHtml = `
-      <td colspan="2">${totalScore - (seventhFromLast + 2*(penultimate + thirdFromLast) + last)}</td><td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td><td colspan="3">${totalScore}</td>
+      <td colspan="2">${totalScore - (fifthFromLast + 2*(penultimate + thirdFromLast) + last)}</td><td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td><td colspan="3">${totalScore}</td>
       `;
             cumulativeScore.innerHTML += cumulativeHtml;
         } else {
@@ -362,17 +364,19 @@ function score10thFrame() {
  `;
         cumulativeScore.innerHTML += cumulativeHtml;
     }
+    postFinalScore();
 }
 
 function finishGame() {
     let formDiv = document.getElementById("form-wrapper");
     let html = `
-  <button type="button" class="submit-button" id="final-button">Log Game</button>
+  <button type="button" class="submit-button" id="reset-button">Reset</button>
   `;
     formDiv.innerHTML = html;
-    let button = document.getElementById("final-button");
-    button.addEventListener("click", postFinalScore);
 }
+
+let button = document.getElementById("reset-button");
+    button.addEventListener("click", resetPage());
 
 function postFinalScore() {
     let scoreTable = document.getElementById("score-column");
@@ -380,4 +384,8 @@ function postFinalScore() {
  <td rowspan="2" id="final-score">${totalScore}</td>
  `;
     scoreTable.innerHTML += finalScoreHtml;
+}
+
+function resetPage() {
+    
 }
