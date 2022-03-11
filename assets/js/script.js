@@ -194,7 +194,7 @@ function scoreAfterStrike() {
     totalScore += penultimate;
     let cumulativeHtml = `
  <td colspan="2">${totalScore - (last + penultimate)}</td> <td colspan="2">${totalScore}</td>
-  `
+  `;
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
@@ -288,7 +288,7 @@ function scoreAfterSpare() {
 }
 
 function scoreStrikeOrSpare() {
-    console.log("strike or spare")
+    console.log("strike or spare");
     totalScore += 10;
 }
 
@@ -340,7 +340,7 @@ function score10thFrame() {
             totalScore += thirdFromLast;
             let cumulativeHtml = `
       <td colspan="2">${totalScore - (seventhFromLast + 2*(penultimate + thirdFromLast) + last)}</td><td colspan="2">${totalScore - (last + penultimate + thirdFromLast)}</td><td colspan="3">${totalScore}</td>
-      `
+      `;
             cumulativeScore.innerHTML += cumulativeHtml;
         } else {
             totalScore += thirdFromLast;
