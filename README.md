@@ -44,6 +44,7 @@ if (input1 === "X") {
         frameArray.push(10, 0);
 ```
 - This second empty value of 0 allowed the calculating functions to differentiate between strike and spare better, by fixing the position of the 10 value that signified a strike within the array of scores and thus allowing the score-incrementing functions to iterate through the array correctly.
+- This game was also tested to ensure it works consistently in different browsers.
 
 ### Validator Testing
 
@@ -55,11 +56,14 @@ if (input1 === "X") {
     - Function with the largest signature take 1 arguments, while the median is 0.
     - Largest function has 35 statements in it, while the median is 8.
     - The most complex function has a cyclomatic complexity value of 24 while the median is 1.
+- The site scores as follows when tested with Lighthouse in Chrome Devtools:
+
+![lighthouse scores for website](https://i.imgur.com/x2wZGdP.jpg)
 
 ## Deployment
 
 - I deployed this site via GitHub Pages. Within the GitHub repository for this project, I navigated to the Pages section of the Settings tab and selected the main branch.
-- Once that is done, the deployed version of the site is available at https://dante-cadiz.github.io/pinalytics/
+- Once that is done, the deployed/live version of the site is available at https://dante-cadiz.github.io/pinalytics/
 
 ## Credits
 
