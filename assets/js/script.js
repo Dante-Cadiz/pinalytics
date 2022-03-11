@@ -228,7 +228,7 @@ function scoreSpareAfter2Strikes() {
     totalScore += (2 * penultimate);
     totalScore += last;
     let cumulativeHtml = `
- <td colspan="2">${totalScore - (last + sixthFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - (last + penultimate)}</td>
+ <td colspan="2">${totalScore - (last + fourthFromLast + penultimate + sixthFromLast)}</td><td colspan="2">${totalScore - (last + penultimate)}</td>
  `;
     cumulativeScore.innerHTML += cumulativeHtml;
 }
