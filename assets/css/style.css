@@ -16,7 +16,7 @@ table, th, td {
     border: 1px solid #000000;
     border-collapse: collapse;
     table-layout: fixed;
-}
+} 
 
 footer {
     position: absolute;
@@ -49,6 +49,12 @@ footer {
     margin: 0 auto;
     padding: 1rem;
     margin-bottom: 1rem;
+}
+
+#form-div {
+    width: 50%;
+    background-color: #FFFF80;
+    margin: auto;
 }
 
 #score-column td, #cumulative-score td {
