@@ -1,16 +1,19 @@
 let frameSubmit = document.getElementById("frame-submit");
 frameSubmit.addEventListener("submit", checkValidInput);
+// Frame count starts at 0, a frame being 2 attempts at knocking the pins over.
 let frames = 0;
 let maxFrames = 9;
 let totalScore = 0;
 let frameArray = [];
 
-function checkValidInput(event) {
+// checks whether the input provided by the user is a valid bowling score
+function checkValidInput(event) { 
     event.preventDefault();
     let input1 = document.getElementById("attempt-1-input").value;
     let input2 = document.getElementById("attempt-2-input").value;
     let integerInput1 = parseInt(input1);
     let integerInput2 = parseInt(input2);
+    // This function looks for a frame count of 9 as opposed to the expected 10 as the frame count starts from 0.
     if (frames === 9) {
         let input3 = document.getElementById("attempt-3-input").value;
         let integerInput3 = parseInt(input3);
@@ -41,22 +44,20 @@ function checkValidInput(event) {
     }
 }
 
+// background counter function for each frame that detects when 9 frames have been bowled and allows for the special case of frame 10
 function countAttempt() {
     logScore();
     if (frames === 8) {
-        console.log("9 frames bowled");
         frames++;
         handle10thFrame();
     } else if (frames < maxFrames) {
         frames++;
-        console.log("frame bowled");
     } else {
-        console.log("10 frames bowled");
         finishGame();
     }
 }
 
-
+// posts the user inputs as HTML content to a row within the DOM
 function logScore() {
     let input1 = document.getElementById("attempt-1-input").value;
     let input2 = document.getElementById("attempt-2-input").value;
@@ -118,6 +119,7 @@ function logScore() {
     document.getElementById("frame-submit").reset();
 }
 
+// checks the way in which the score should be incremented depending on a variety of conditions and scores in previous frames
 function checkScore() {
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -165,13 +167,13 @@ function checkScore() {
     }
 }
 
+// scores the second consecutive strike
 function scoreDouble() {
-    console.log("double");
     totalScore += 10;
 }
 
+// scores a spare following a strike in the previous frame
 function scoreSpareAfterStrike() {
-    console.log("spare after strike");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -185,8 +187,8 @@ function scoreSpareAfterStrike() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores a non strike or spare attempt after a previous strike
 function scoreAfterStrike() {
-    console.log("attempt after strike");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -200,8 +202,8 @@ function scoreAfterStrike() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores three strikes in a row, known in bowling parlance as a 'turkey'
 function scoreTurkey() {
-    console.log("turkey");
     let cumulativeScore = document.getElementById("cumulative-score");
     let penultimate = parseInt(frameArray.slice(-2, -1));
     let fourthFromLast = parseInt(frameArray.slice(-4, -3));
@@ -214,8 +216,8 @@ function scoreTurkey() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores a spare following 2 strikes
 function scoreSpareAfter2Strikes() {
-    console.log("spare after 2 strikes");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -223,16 +225,16 @@ function scoreSpareAfter2Strikes() {
     let fourthFromLast = parseInt(frameArray.slice(-4, -3));
     totalScore += fourthFromLast;
     totalScore += sixthFromLast;
-    totalScore += penultimate;
+    totalScore += (2*penultimate);
     totalScore += last;
     let cumulativeHtml = `
- <td colspan="2">${totalScore - (last + sixthFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - last}</td>
+ <td colspan="2">${totalScore - (last + sixthFromLast + fourthFromLast)}</td><td colspan="2">${totalScore - (last + penultimate)}</td>
  `;
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores a non strike or spare attempt that follows 2 strikes
 function scoreAfter2Strikes() {
-    console.log("attempt after 2 strikes");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -246,8 +248,8 @@ function scoreAfter2Strikes() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores a strike that follows a spare
 function scoreStrikeAfterSpare() {
-    console.log("strike after spare");
     let cumulativeScore = document.getElementById("cumulative-score");
     let penultimate = parseInt(frameArray.slice(-2, -1));
     let thirdFromLast = parseInt(frameArray.slice(-3, -2));
@@ -261,8 +263,8 @@ function scoreStrikeAfterSpare() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores a spare that follows another spare
 function scoreSpareAfterSpare() {
-    console.log("spare after spare");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -275,8 +277,8 @@ function scoreSpareAfterSpare() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores an attempt that follows a spare
 function scoreAfterSpare() {
-    console.log("attempt after spare");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -289,13 +291,13 @@ function scoreAfterSpare() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
+// scores either a strike or a spare
 function scoreStrikeOrSpare() {
-    console.log("strike or spare");
     totalScore += 10;
 }
 
+// scores an ordinary attempt with no special preceeding case
 function score() {
-    console.log("attempt after attempt");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -307,15 +309,16 @@ function score() {
     cumulativeScore.innerHTML += cumulativeHtml;
 }
 
-
-
+// creates the HTML for frame 10, in which the player may possibly bowl 3 frames
 function handle10thFrame() {
     let form = document.getElementById("frame-submit");
     let html = `
      <label for="attempt-1-input">Attempt 1</label>
             <input type="text" id="attempt-1-input" name="attempt-1-input" required>
+            <br>
             <label for="attempt-2-input">Attempt 2</label>
             <input type="text" id="attempt-2-input" name="attempt-2-input">
+            <br>
             <label for="attempt-3-input">Attempt 3</label>
             <input type="text" id="attempt-3-input" name="attempt-3-input">
             <input type="submit" class="submit-button" value="Record Score"></input>
@@ -323,8 +326,8 @@ function handle10thFrame() {
     form.innerHTML = html;
 }
 
+// scores the unique scenario of the 10th frame depending on past cases
 function score10thFrame() {
-    console.log("scoring 10th frame");
     let cumulativeScore = document.getElementById("cumulative-score");
     let last = parseInt(frameArray.slice(-1));
     let penultimate = parseInt(frameArray.slice(-2, -1));
@@ -367,17 +370,16 @@ function score10thFrame() {
     postFinalScore();
 }
 
+// finishes the game, creating a reset button for the user to press in order to refresh the page with an empty scoreboard
 function finishGame() {
     let formDiv = document.getElementById("form-wrapper");
     let html = `
-  <button type="button" class="submit-button" id="reset-button">Reset</button>
+  <button type="button" class="submit-button" id="reset-button" onClick="window.location.reload();">Reset</button>
   `;
     formDiv.innerHTML = html;
 }
 
-let button = document.getElementById("reset-button");
-    button.addEventListener("click", resetPage());
-
+// posts the final score to the total score column once 10 frames are bowled
 function postFinalScore() {
     let scoreTable = document.getElementById("score-column");
     let finalScoreHtml = `
@@ -386,6 +388,3 @@ function postFinalScore() {
     scoreTable.innerHTML += finalScoreHtml;
 }
 
-function resetPage() {
-    
-}
